@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8D5BF6D9-D28E-49BE-9216-6CE2541A456D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{67FF4805-A0A1-4513-B646-B6F32EC0F599}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "App\Api\Api.csproj", "{5EE81406-9895-400F-9F08-DD2F5533CB7F}"
