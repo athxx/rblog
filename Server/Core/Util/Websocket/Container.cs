@@ -22,7 +22,8 @@ public class WebSocketContainer
         return _sockets.TryAdd(connectionId, webSocket);
     }
 
-    public async Task BroadcastMessageAsync(byte[] buffer, WebSocketMessageType messageType, CancellationToken cancellationToken)
+    public async Task BroadcastMessageAsync(byte[] buffer, WebSocketMessageType messageType,
+        CancellationToken cancellationToken)
     {
         foreach (WebSocket socket in _sockets.Values)
         {
@@ -33,7 +34,8 @@ public class WebSocketContainer
         }
     }
 
-    public async Task RemoveSocketAsync(string connectionId, WebSocketCloseStatus closeStatus, string closeStatusDescription, CancellationToken cancellationToken)
+    public async Task RemoveSocketAsync(string connectionId, WebSocketCloseStatus closeStatus,
+        string closeStatusDescription, CancellationToken cancellationToken)
     {
         if (_sockets.TryRemove(connectionId, out WebSocket webSocket))
         {

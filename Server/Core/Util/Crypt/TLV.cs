@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Core.Util.Crypt;
 
 public class TLV
@@ -14,6 +11,7 @@ public class TLV
             tlvBytes.AddRange(BitConverter.GetBytes(pair.Value.Length));
             tlvBytes.AddRange(pair.Value);
         }
+
         return tlvBytes.ToArray();
     }
 
@@ -36,6 +34,7 @@ public class TLV
 
             data.Add(tag, value);
         }
+
         return data;
     }
 }

@@ -17,6 +17,7 @@ public class Md5
             {
                 sb.Append(hashBytes[i].ToString("x2"));
             }
+
             return sb.ToString();
         }
     }

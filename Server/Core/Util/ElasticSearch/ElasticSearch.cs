@@ -1,5 +1,3 @@
-using System;
-using Elasticsearch.Net;
 using Nest;
 
 namespace Core.Util.ElasticSearch;

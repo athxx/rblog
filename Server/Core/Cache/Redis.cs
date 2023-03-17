@@ -1,6 +1,3 @@
-using StackExchange.Redis;
-using System;
-
 namespace Core.Cache;
 
 using StackExchange.Redis;
@@ -29,7 +26,7 @@ public class RedisCache
         return $"{_instanceName}:{key}";
     }
 
-    public T Get<T>(string key)
+    public T? Get<T>(string key)
     {
         var redis = GetConnection().GetDatabase();
         var cacheKey = GetKey(key);
@@ -59,7 +56,7 @@ public class RedisCache
         return redis.KeyDelete(cacheKey);
     }
 
-    private byte[] Serialize<T>(T value)
+    private byte[]? Serialize<T>(T value)
     {
         if (value == null)
         {
@@ -70,7 +67,7 @@ public class RedisCache
         return System.Text.Encoding.UTF8.GetBytes(json);
     }
 
-    private T Deserialize<T>(byte[] bytes)
+    private T? Deserialize<T>(byte[] bytes)
     {
         if (bytes == null)
         {

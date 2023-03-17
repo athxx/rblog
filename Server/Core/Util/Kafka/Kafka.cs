@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Confluent.Kafka;
 
 namespace Core.Util;
@@ -20,7 +18,8 @@ public class KafkaClient : IDisposable
 
     public async Task ProduceAsync(string topic, string message)
     {
-        var result = await _producer.ProduceAsync(topic, new Message<string, string> { Key = Guid.NewGuid().ToString(), Value = message });
+        var result = await _producer.ProduceAsync(topic,
+            new Message<string, string> { Key = Guid.NewGuid().ToString(), Value = message });
         Console.WriteLine($"Produced message to '{result.TopicPartitionOffset}'");
     }
 

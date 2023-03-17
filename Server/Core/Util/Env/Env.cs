@@ -1,7 +1,7 @@
-using DotNetEnv;
 using System.Collections;
 
 namespace Core.Util;
+
 public class Env
 {
     public static Hashtable Load()

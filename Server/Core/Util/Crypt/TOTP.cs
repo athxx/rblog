@@ -1,4 +1,3 @@
-using System;
 using System.Security.Cryptography;
 
 namespace Core.Util.Crypt;
@@ -31,14 +30,17 @@ public class TOTP
 
     public string GenerateCode(DateTime timestamp)
     {
-        byte[] timestampBytes = BitConverter.GetBytes((long)(timestamp - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / _timeStepSeconds);
+        byte[] timestampBytes =
+            BitConverter.GetBytes((long)(timestamp - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds /
+                                  _timeStepSeconds);
         Array.Reverse(timestampBytes);
 
         HMACSHA1 hmac = new HMACSHA1(_secret);
         byte[] hash = hmac.ComputeHash(timestampBytes);
 
         int offset = hash[hash.Length - 1] & 0x0F;
-        int binaryCode = ((hash[offset] & 0x7F) << 24) | ((hash[offset + 1] & 0xFF) << 16) | ((hash[offset + 2] & 0xFF) << 8) | (hash[offset + 3] & 0xFF);
+        int binaryCode = ((hash[offset] & 0x7F) << 24) | ((hash[offset + 1] & 0xFF) << 16) |
+                         ((hash[offset + 2] & 0xFF) << 8) | (hash[offset + 3] & 0xFF);
 
         int code = binaryCode % (int)Math.Pow(10, _digits);
 

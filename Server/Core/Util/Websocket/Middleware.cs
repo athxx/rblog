@@ -35,12 +35,14 @@ public class WebSocketMiddleware
 
         while (webSocket.State == WebSocketState.Open)
         {
-            WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            WebSocketReceiveResult result =
+                await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
             if (result.MessageType == WebSocketMessageType.Close)
             {
                 _sockets.TryRemove(connectionId, out webSocket);
-                await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+                await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
+                    CancellationToken.None);
                 return;
             }
 
@@ -48,7 +50,8 @@ public class WebSocketMiddleware
             {
                 if (socket.State == WebSocketState.Open)
                 {
-                    await socket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
+                    await socket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType,
+                        result.EndOfMessage, CancellationToken.None);
                 }
             }
         }
