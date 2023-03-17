@@ -1,14 +1,14 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["App/Api/Api.csproj", "App/Api/"]
-RUN dotnet restore "App/Api/Api.csproj"
+COPY ["Server/Api/Api.csproj", "Server/Api/"]
+RUN dotnet restore "Server/Api/Api.csproj"
 COPY . .
-WORKDIR "/src/App/Api"
+WORKDIR "/src/Server/Api"
 RUN dotnet build "Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
