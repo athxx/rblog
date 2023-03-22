@@ -32,12 +32,7 @@ public class RedisCache
         var cacheKey = GetKey(key);
         var value = redis.StringGet(cacheKey);
 
-        if (!value.HasValue)
-        {
-            return default;
-        }
-
-        return Deserialize<T>(value);
+        return !value.HasValue ? default : Deserialize<T>(value);
     }
 
     public void Set<T>(string key, T value, TimeSpan? expiration = null)
