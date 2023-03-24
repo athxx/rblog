@@ -16,6 +16,14 @@ public class HomeController : ControllerBase
             })
             .ToArray();
     }
+
+    [HttpGet("/env")]
+    public string GetEnv()
+    {
+        ;
+
+        return "";
+    }
 }
 
 public class HomeData
@@ -23,4 +31,10 @@ public class HomeData
     public DateTime Date { get; set; }
 
     public string? Summary { get; set; }
+}
+
+public class Product
+{
+    public Guid pid { get; set; }
+    public string pname { get; set; }
 }
